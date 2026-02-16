@@ -17,4 +17,4 @@ class SensorDataCreate(SensorDataBase):
 class SensorDataResponse(SensorDataBase):
     id: int
     sensor_id: int
-    timestamp: datetime
+    timestamp: datetime.datetime

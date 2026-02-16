@@ -11,7 +11,9 @@ class SensorBase(BaseModel):
 
 
 class SensorCreate(BaseModel):
-    pass
+    name: str
+    ip: IPvAnyAddress
+    data_type: Literal["temperature", "humidity", "pressure", "light"]
 
 
 class SensorUpdate(BaseModel):
@@ -22,4 +24,4 @@ class SensorUpdate(BaseModel):
 
 class SensorResponse(SensorBase):
     id: int
-    created_at: datetime
+    created_at: datetime.datetime
