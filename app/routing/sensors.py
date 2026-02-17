@@ -32,7 +32,7 @@ def update_sensor(sensor_id:int, sensor: SensorUpdate):
 
     return SensorService.update_sensor(sensor_id, sensor)
 
-@router.delete("/sensor_id", status_code=status.HTTP_204_NO_CONTENT)
+@router.delete("/{sensor_id}", status_code=status.HTTP_204_NO_CONTENT)
 def delete_sensor(sensor_id:int):
     existing = SensorService.get_sensor(sensor_id)
     if not existing:

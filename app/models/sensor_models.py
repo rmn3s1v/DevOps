@@ -5,7 +5,7 @@ from pydantic import BaseModel, Field, IPvAnyAddress
 
 
 class SensorBase(BaseModel):
-    name: str = Field(..., min_lenght=3)
+    name: str = Field(..., min_length=3)
     ip: IPvAnyAddress
     data_type: Literal["temperature", "humidity", "pressure", "light"]
 
