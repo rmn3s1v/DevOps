@@ -1,4 +1,5 @@
 import datetime
+from typing import Optional
 from pydantic import BaseModel
 
 
@@ -12,6 +13,13 @@ class SensorDataBase(BaseModel):
 
 class SensorDataCreate(SensorDataBase):
     pass
+
+
+class SensorDataUpdate(BaseModel):
+    temperature: Optional[float] = None
+    humidity: Optional[int] = None
+    pressure: Optional[int] = None
+    light: Optional[int] = None
 
 
 class SensorDataResponse(SensorDataBase):

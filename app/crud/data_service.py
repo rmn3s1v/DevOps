@@ -7,15 +7,14 @@ class DataService:
 
     @staticmethod
     def create_data(sensor_id: int, data:SensorDataCreate):
-        count = db.sensor_data.count_documents({})
+        count = db.sensor_data.count_documents({"sensor_id": sensor_id})
         new_id = count + 1
 
         data_dict = data.model_dump()
-        data_dict.update({
-            "id":new_id,
-            "sensor_id": sensor_id,
-            "timestamp": datetime.now()
-        })
+        data_dict = data.model_dump()
+        data_dict["id"] = new_id
+        data_dict["sensor_id"] = sensor_id
+        data_dict["timestamp"] = datetime.now()
 
         db.sensor_data.insert_one(data_dict)
         return data_dict
@@ -32,15 +31,31 @@ class DataService:
         return list(cursor)
 
     @staticmethod
-    def delete_sensor_data(sensor_id: int):
-        db.sensor_data.delete_many({"sensor_id": sensor_id})
-        return True
+    def update_data(sensor_id: int, data_id: int, data):
+        existing = db.sensor_data.find(
+            {"sensor_id":sensor_id}, {"_id": 0}
+        )
+
+        if not existing:
+            return None
+
+        update_fields = {
+            k: v for k, v in data.model_dump().items()
+            if v is not None
+        }
+
+        db.sensor_data.update_one(
+            {"sensor_id": sensor_id, "id": data_id},
+            {"$set": update_fields}
+        )
+
+        return db.sensor_data.find_one(
+            {"sensor_id": sensor_id, "id": data_id},
+            {"_id": 0}
+        )
+
 
     @staticmethod
-    def get_data_by_type(limit: int = 100):
-        cursor = (
-            db.sensor_data
-            .find({}, {"_id": 0})
-            .limit(limit)
-        )
-        return list(cursor)
+    def delete_sensor_data(sensor_id: int, id : int):
+        db.sensor_data.delete_one({"sensor_id": sensor_id, "id": id})
+        return True

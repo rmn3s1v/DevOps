@@ -15,7 +15,7 @@ def test_create_data(client: TestClient):
     sensor_id = create_sensor.json()["id"]
 
     response = client.post(
-        f"/api/sensor/{sensor_id}/data",
+        f"/api/sensors/{sensor_id}/data",
         json={
             "temperature": 23.5,
             "humidity": 60
@@ -27,7 +27,7 @@ def test_create_data(client: TestClient):
 
     assert data["temperature"] == 23.5
     assert data["humidity"] == 60
-    assert data["sensor_id"] == 1
+    assert data["sensor_id"] == sensor_id
 
 
 def test_get_sensor_data(client: TestClient):
@@ -43,13 +43,13 @@ def test_get_sensor_data(client: TestClient):
     sensor_id = create_sensor.json()["id"]
 
     client.post(
-        f"/api/sensor/{sensor_id}/data",
+        f"/api/sensors/{sensor_id}/data",
         json={
             "temperature": 20.0
         }
     )
 
-    response = client.get(f"/api/sensor/{sensor_id}/data")
+    response = client.get(f"/api/sensors/{sensor_id}/data")
 
     assert response.status_code == 200
     data = response.json()
@@ -57,6 +57,38 @@ def test_get_sensor_data(client: TestClient):
     assert isinstance(data, list)
     assert len(data) == 1
     assert data[0]["temperature"] == 20.0
+
+
+def test_update_data(client):
+    sensor = client.post(
+        "/api/sensors",
+        json={
+            "name": "TestSensor",
+            "ip": "1.1.1.1",
+            "data_type": "temperature"
+        }
+    )
+
+    sensor_id = sensor.json()["id"]
+
+    data = client.post(
+        f"/api/sensors/{sensor_id}/data",
+        json={
+            "temperature": 20
+        }
+    )
+
+    data_id = data.json()["id"]
+
+    response = client.put(
+        f"/api/sensors/{sensor_id}/data/{data_id}",
+        json={
+            "temperature": 30
+        }
+    )
+
+    assert response.status_code == 200
+    assert response.json()["temperature"] == 30
 
 
 def test_delete_sensor_data(client: TestClient):
@@ -71,16 +103,18 @@ def test_delete_sensor_data(client: TestClient):
 
     sensor_id = create_sensor.json()["id"]
 
-    client.post(
-        f"/api/sensor/{sensor_id}/data",
+    create_data = client.post(
+        f"/api/sensors/{sensor_id}/data",
         json={
             "temperature": 22.2
         }
     )
 
-    response = client.delete(f"/api/sensor/{sensor_id}/data")
+    data_id = create_data.json()["id"]
+
+    response = client.delete(f"/api/sensors/{sensor_id}/data/{data_id}")
     assert response.status_code == 204
 
-    response = client.get(f"/api/sensor/{sensor_id}/data")
+    response = client.get(f"/api/sensors/{sensor_id}/data")
     assert response.status_code == 200
     assert response.json() == []
