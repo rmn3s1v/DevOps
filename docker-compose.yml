@@ -20,5 +20,13 @@ services:
       - MONGO_URL=mongodb://mongo:27017
     restart: always
 
+  frontend:
+    build: ./frontend
+    container_name: vue_frontend
+    ports:
+      - "3000:80"
+    depends_on:
+      - backend
+
 volumes:
   mongo_data:
