@@ -1,6 +1,6 @@
 from datetime import datetime
-from app.db.database import db
-from app.models.data_models import SensorDataCreate
+from db.database import db
+from models.data_models import SensorDataCreate
 
 
 class DataService:

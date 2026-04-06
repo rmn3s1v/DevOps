@@ -1,8 +1,8 @@
 from typing import List
 from fastapi import APIRouter, Query, status, HTTPException
-from app.models.data_models import SensorDataResponse, SensorDataCreate, SensorDataUpdate
-from app.crud.data_service import DataService
-from app.crud.sensor_service import SensorService
+from models.data_models import SensorDataResponse, SensorDataCreate, SensorDataUpdate
+from crud.data_service import DataService
+from crud.sensor_service import SensorService
 
 router = APIRouter(tags=["Sensor Data"])
 

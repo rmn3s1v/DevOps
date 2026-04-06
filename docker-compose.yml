@@ -9,16 +9,32 @@ services:
     volumes:
       - mongo_data:/data/db
 
+    healthcheck:
+      test: ["CMD", "mongosh", "--quiet", "127.0.0.1", "--eval", "db.adminCommand('ping')"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+      start_period: 10s
+    restart: always
+
   backend:
-    build: .
+    build: ./app
     container_name: iot-backend
     ports:
       - "8000:8000"
     depends_on:
-      - mongo
+      mongo:
+        condition: service_healthy
     environment:
       - MONGO_URL=mongodb://mongo:27017
     restart: always
+
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:8000/health"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+      start_period: 10s
 
   frontend:
     build: ./frontend
@@ -26,7 +42,9 @@ services:
     ports:
       - "3000:80"
     depends_on:
-      - backend
+      backend:
+        condition: service_healthy
+    restart: always
 
 volumes:
   mongo_data:

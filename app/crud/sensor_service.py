@@ -1,6 +1,6 @@
 from datetime import datetime
-from app.db.database import db
-from app.models.sensor_models import SensorCreate, SensorUpdate
+from db.database import db
+from models.sensor_models import SensorCreate, SensorUpdate
 
 
 class SensorService:

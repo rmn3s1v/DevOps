@@ -1,0 +1,9 @@
+.gitignore
+
+.vscode/
+
+tests/
+
+Dockerfile
+
+node_modules/
