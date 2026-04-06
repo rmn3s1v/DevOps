@@ -1,7 +1,7 @@
 from typing import List
 from fastapi import APIRouter, status, HTTPException
-from models.sensor_models import SensorCreate, SensorResponse, SensorUpdate
-from crud.sensor_service import SensorService
+from app.models.sensor_models import SensorCreate, SensorResponse, SensorUpdate
+from app.crud.sensor_service import SensorService
 
 router = APIRouter(
     prefix="/sensors",

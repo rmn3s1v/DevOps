@@ -1,5 +1,5 @@
 from fastapi import FastAPI
-from routing import sensors, data
+from app.routing import sensors, data
 from fastapi.middleware.cors import CORSMiddleware
 
 app = FastAPI()
