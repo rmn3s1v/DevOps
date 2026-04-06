@@ -38,6 +38,7 @@ jobs:
       - name: Run tests
         env:
           MONGO_URL: mongodb://localhost:27017
+          PYTHONPATH: .
         run: pytest
 
   backend-build:
@@ -52,7 +53,7 @@ jobs:
         uses: docker/setup-buildx-action@v3
 
       - name: Build Docker image
-        run: docker build -t iot-backend .
+        run: docker build -t iot-backend ./app
 
   frontend-test:
     needs: backend-build
