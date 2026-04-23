@@ -106,10 +106,11 @@ jobs:
     steps:
     - uses: actions/checkout@v4
 
-    - name: Login to YCR
-      run: echo "${{ secrets.YC_TOKEN }}" | docker login \
-        --username oauth \
-        --password-stdin cr.yandex
+    - name: Login to Yandex Registry
+      run: |
+        echo '${{ secrets.YC_SA_KEY }}' | docker login \
+          --username json_key \
+          --password-stdin cr.yandex
 
     - name: Build image backend
       run: docker build -t cr.yandex/crpiq93oeqf9gf5j6t0l/backend:latest /Users/romanzausailov/Projects/DevOps/app
