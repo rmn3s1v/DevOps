@@ -113,13 +113,13 @@ jobs:
           --password-stdin cr.yandex
 
     - name: Build image backend
-      run: docker build -t cr.yandex/crpiq93oeqf9gf5j6t0l/backend:latest /Users/romanzausailov/Projects/DevOps/app
+      run: docker build -t cr.yandex/crpiq93oeqf9gf5j6t0l/backend:latest ./app
 
     - name: Push image backend
       run: docker push cr.yandex/crpiq93oeqf9gf5j6t0l/backend:latest
 
     - name: Build image frontend
-      run: docker build -t cr.yandex/crpiq93oeqf9gf5j6t0l/frontend:latest /Users/romanzausailov/Projects/DevOps/frontend
+      run: docker build -t cr.yandex/crpiq93oeqf9gf5j6t0l/frontend:latest ./frontend
 
     - name: Push image frontend
       run: docker push cr.yandex/crpiq93oeqf9gf5j6t0l/frontend:latest
