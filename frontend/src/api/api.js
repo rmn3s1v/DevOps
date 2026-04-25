@@ -5,7 +5,6 @@ const api = axios.create({
 });
 
 /* ===== SENSORS ===== */
-
 export const getSensors = () => api.get("/sensors");
 
 export const createSensor = (data) =>
