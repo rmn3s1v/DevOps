@@ -1,7 +1,7 @@
 import axios from "axios";
 
 const api = axios.create({
-  baseURL: "http://178.154.253.91:8000/api",
+  baseURL: "/api",
 });
 
 /* ===== SENSORS ===== */
