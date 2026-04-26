@@ -2,6 +2,7 @@ from typing import List
 from fastapi import APIRouter, status, HTTPException
 from app.models.sensor_models import SensorCreate, SensorResponse, SensorUpdate
 from app.crud.sensor_service import SensorService
+from app.metrics import sensors_created_total, sensor_create_errors_total
 
 router = APIRouter(
     prefix="/sensors",
@@ -10,7 +11,20 @@ router = APIRouter(
 
 @router.post("", response_model=SensorResponse, status_code=status.HTTP_201_CREATED)
 def create_sensor(sensor: SensorCreate):
-    return SensorService.create_sensor(sensor)
+    try:
+        created_sensor = SensorService.create_sensor(sensor)
+
+        sensors_created_total.labels(
+            data_type=sensor.data_type
+        ).inc()
+
+        return created_sensor
+
+    except Exception:
+        sensor_create_errors_total.labels(
+            reason="create_sensor_failed"
+        ).inc()
+        raise
 
 @router.get("", response_model=List[SensorResponse])
 def get_sensors():

@@ -3,3 +3,5 @@ uvicorn
 pymongo
 pytest
 httpx
+prometheus-fastapi-instrumentator
+prometheus-client

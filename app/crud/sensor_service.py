@@ -2,7 +2,6 @@ from datetime import datetime
 from app.db.database import db
 from app.models.sensor_models import SensorCreate, SensorUpdate
 
-
 class SensorService:
 
     @staticmethod
