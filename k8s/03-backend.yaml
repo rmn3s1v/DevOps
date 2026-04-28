@@ -17,11 +17,7 @@ spec:
     spec:
       containers:
         - name: backend
-<<<<<<< HEAD
           image: cr.yandex/crpiq93oeqf9gf5j6t0l/backend:e934497
-=======
-          image: cr.yandex/crpiq93oeqf9gf5j6t0l/backend:e934497
->>>>>>> 1c95c8f (Add VK notifications for CI CD pipeline)
           imagePullPolicy: Always
           ports:
             - name: http
