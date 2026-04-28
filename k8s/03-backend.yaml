@@ -17,7 +17,7 @@ spec:
     spec:
       containers:
         - name: backend
-          image: cr.yandex/crpiq93oeqf9gf5j6t0l/backend:af8c7af Argo CD deployment with commit image tagsf92
+          image: cr.yandex/crpiq93oeqf9gf5j6t0l/backend:af8c7af
           imagePullPolicy: Always
           ports:
             - name: http
