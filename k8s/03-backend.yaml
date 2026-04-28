@@ -17,7 +17,11 @@ spec:
     spec:
       containers:
         - name: backend
+<<<<<<< HEAD
           image: cr.yandex/crpiq93oeqf9gf5j6t0l/backend:5388dab
+=======
+          image: cr.yandex/crpiq93oeqf9gf5j6t0l/backend:af8c7af
+>>>>>>> 1c95c8f (Add VK notifications for CI CD pipeline)
           imagePullPolicy: Always
           ports:
             - name: http
@@ -27,7 +31,7 @@ spec:
               value: "mongodb://mongo:27017"
           resources:
             requests:
-              cpu: "100m"
+              cpu: "300m"
               memory: "128Mi"
             limits:
               cpu: "500m"
