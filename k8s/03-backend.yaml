@@ -12,6 +12,8 @@ spec:
     metadata:
       labels:
         app: backend
+      annotations:
+        argocd-test: "enabled"
     spec:
       containers:
         - name: backend
