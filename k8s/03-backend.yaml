@@ -17,7 +17,7 @@ spec:
     spec:
       containers:
         - name: backend
-          image: cr.yandex/crpiq93oeqf9gf5j6t0l/backend:af8c7af
+          image: cr.yandex/crpiq93oeqf9gf5j6t0l/backend:5388dab
           imagePullPolicy: Always
           ports:
             - name: http
