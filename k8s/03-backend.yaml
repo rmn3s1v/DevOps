@@ -13,7 +13,7 @@ spec:
       labels:
         app: backend
       annotations:
-        argocd-test: "enabled"
+        argocd-test: "version-2"
     spec:
       containers:
         - name: backend
