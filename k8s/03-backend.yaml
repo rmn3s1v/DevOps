@@ -18,7 +18,8 @@ spec:
           image: cr.yandex/crpiq93oeqf9gf5j6t0l/backend:latest
           imagePullPolicy: Always
           ports:
-            - containerPort: 8000
+            - name: http
+              containerPort: 8000
           env:
             - name: MONGO_URL
               value: "mongodb://mongo:27017"
@@ -35,8 +36,10 @@ kind: Service
 metadata:
   name: backend
   namespace: devops
+  labels:
+    app: backend
 spec:
-  type: ClusterIP
+  type: LoadBalancer
   selector:
     app: backend
   ports:
