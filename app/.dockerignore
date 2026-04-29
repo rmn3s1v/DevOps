@@ -1,12 +1,17 @@
 __pycache__/
-.pytesh_cache/
+.pytest_cache/
 *.pyc
 *.pyo
 *.pyd
 
+.env
+.env.*
+.DS_Store
+
 test/
 pytest.ini
-
-.env
-
 Dockerfile
+docker.txt
+
+.git/
+.gitignore

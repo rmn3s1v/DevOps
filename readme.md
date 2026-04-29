@@ -27,7 +27,7 @@ docker run --rm -it \
 watch kubectl get hpa,deploy,pods -n devops
 
 Прямое подключение к БД
-kubectl exec -it mongo-55b9b9b7db-4f6ks -n devops -- mongosh
+kubectl exec -it mongo-55b9b9b7db-gnc9m -n devops -- mongosh
 
 admin - pass grafana
 DevOps1234567_ - pass sonarqube
