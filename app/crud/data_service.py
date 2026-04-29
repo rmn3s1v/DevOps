@@ -11,7 +11,6 @@ class DataService:
         new_id = count + 1
 
         data_dict = data.model_dump()
-        data_dict = data.model_dump()
         data_dict["id"] = new_id
         data_dict["sensor_id"] = sensor_id
         data_dict["timestamp"] = datetime.now()

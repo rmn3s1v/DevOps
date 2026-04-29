@@ -15,6 +15,6 @@ import SensorForm from "./components/SensorForm.vue";
 const listRef = ref(null);
 
 const reload = () => {
-  window.location.reload();
+  globalThis.location.reload();
 };
 </script>

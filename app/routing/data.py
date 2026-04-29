@@ -1,4 +1,4 @@
-from typing import List
+from typing import Annotated, List
 from fastapi import APIRouter, Query, status, HTTPException
 from app.models.data_models import SensorDataResponse, SensorDataCreate, SensorDataUpdate
 from app.crud.data_service import DataService
@@ -13,6 +13,8 @@ from app.metrics import (
     sensor_light_value,
 )
 
+detail="Sensor not found with add data"
+
 router = APIRouter(tags=["Sensor Data"])
 
 @router.post("/sensors/{sensor_id}/data", response_model=SensorDataResponse, status_code=status.HTTP_201_CREATED)
@@ -24,7 +26,7 @@ def create_data(sensor_id: int, data: SensorDataCreate):
         ).inc()
         raise HTTPException(
             status_code=status.HTTP_404_NOT_FOUND,
-            detail="Sensor not found with add data"
+            detail=detail
         )
 
     try:
@@ -59,10 +61,10 @@ def create_data(sensor_id: int, data: SensorDataCreate):
         raise
 
 @router.get("/sensors/{sensor_id}/data", response_model=List[SensorDataResponse])
-def get_sensor_data(sensor_id:int, limit: int=Query(100, le=1000)):
+def get_sensor_data(sensor_id:int, limit: Annotated[int, Query(le=1000)] = 100):
     sensor = SensorService.get_sensor(sensor_id)
     if not sensor:
-        raise HTTPException(status_code=status.HTTP_404_NOT_FOUND, detail="Sensor not found with add data")
+        raise HTTPException(status_code=status.HTTP_404_NOT_FOUND, detail=detail)
 
     return DataService.get_sensor_data(sensor_id, limit)
 
@@ -80,6 +82,5 @@ def update_data(sensor_id: int, data_id: int, data: SensorDataUpdate):
 def delete_data(sensor_id:int, data_id: int):
     sensor = SensorService.get_sensor(sensor_id)
     if not sensor:
-        raise HTTPException(status_code=status.HTTP_404_NOT_FOUND, detail="Sensor not found with add data")
+        raise HTTPException(status_code=status.HTTP_404_NOT_FOUND, detail=detail)
     DataService.delete_sensor_data(sensor_id, data_id)
-    return
