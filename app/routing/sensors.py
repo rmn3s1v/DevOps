@@ -4,6 +4,8 @@ from app.models.sensor_models import SensorCreate, SensorResponse, SensorUpdate
 from app.crud.sensor_service import SensorService
 from app.metrics import sensors_created_total, sensor_create_errors_total
 
+detail = "Sensor not found"
+
 router = APIRouter(
     prefix="/sensors",
     tags=["Sensors"]
@@ -34,7 +36,7 @@ def get_sensors():
 def get_sensor_id(sensor_id:int):
     sensor = SensorService.get_sensor(sensor_id)
     if not sensor:
-        raise HTTPException(status_code=status.HTTP_404_NOT_FOUND, detail="Sensor not found")
+        raise HTTPException(status_code=status.HTTP_404_NOT_FOUND, detail=detail)
 
     return sensor
 
@@ -50,7 +52,6 @@ def update_sensor(sensor_id:int, sensor: SensorUpdate):
 def delete_sensor(sensor_id:int):
     existing = SensorService.get_sensor(sensor_id)
     if not existing:
-        raise HTTPException(status_code=status.HTTP_404_NOT_FOUND, detail="Sensor not found")
+        raise HTTPException(status_code=status.HTTP_404_NOT_FOUND, detail=detail)
 
     SensorService.delete_sensor(sensor_id)
-    return
