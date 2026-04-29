@@ -15,7 +15,7 @@ spec:
     spec:
       containers:
         - name: frontend
-          image: cr.yandex/crpiq93oeqf9gf5j6t0l/frontend:0ce60dc
+          image: cr.yandex/crpiq93oeqf9gf5j6t0l/frontend:370401e
           imagePullPolicy: Always
           ports:
             - containerPort: 80
