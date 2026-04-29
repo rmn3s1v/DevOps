@@ -252,6 +252,9 @@ jobs:
           fi
 
       - name: Send VK notification
+        env:
+          VK_TOKEN: ${{ secrets.VK_TOKEN }}
+          VK_PEER_IDS: ${{ secrets.VK_PEER_IDS }}
         run: |
           MESSAGE="${{ steps.pipeline_status.outputs.emoji }} CI/CD pipeline: ${{ steps.pipeline_status.outputs.status }}
 
@@ -269,6 +272,11 @@ jobs:
           frontend-build: ${{ needs.frontend-build.result }}
           sonarqube: ${{ needs.sonarqube.result }}
           save-image: ${{ needs.save-image.result }}"
+
+          for PEER_ID in $VK_PEER_IDS; do
+            echo "Sending VK notification to peer_id=$PEER_ID"
+
+            RANDOM_ID=$(( $(date +%s) + PEER_ID % 100000 ))
 
           RESPONSE=$(curl -s -X POST "https://api.vk.com/method/messages.send" \
             -d "access_token=${{ secrets.VK_TOKEN }}" \
