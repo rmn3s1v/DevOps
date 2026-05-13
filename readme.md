@@ -36,4 +36,4 @@ DevOps1234567_ - pass sonarqube
 HXVHNf0-5jqEB7XC - pass argocd
 
 
-sqp_2e28d5ff11df8c789a4c19237a89567f10d04c38 - token sonarqube
+sqp_c20541ce987fe707b3047c8be6ba1881a7c61e79 - token sonarqube
