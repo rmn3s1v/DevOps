@@ -1,0 +1,30 @@
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: devops-alb
+  namespace: devops
+  annotations:
+    ingress.alb.yc.io/group-name: devops-alb
+    ingress.alb.yc.io/subnets: e9b8v4rv4fpps8pg74j5
+    ingress.alb.yc.io/security-groups: enp2f3cj639agvhr9hv9
+    ingress.alb.yc.io/external-ipv4-address: auto
+spec:
+  ingressClassName: alb
+  rules:
+    - http:
+        paths:
+          - path: /api
+            pathType: Prefix
+            backend:
+              service:
+                name: backend
+                port:
+                  number: 8000
+
+          - path: /
+            pathType: Prefix
+            backend:
+              service:
+                name: frontend
+                port:
+                  number: 80
