@@ -120,7 +120,7 @@ jobs:
 
   save-image:
     runs-on: ubuntu-latest
-    if: github.event_name == 'push' && github.ref == 'refs/heads/master'
+    if: github.event_name == 'push' && github.ref == 'refs/heads/lab3'
     needs:
       - frontend-build
 
@@ -163,26 +163,3 @@ jobs:
         run: |
           docker push cr.yandex/crpiq93oeqf9gf5j6t0l/frontend:${IMAGE_TAG}
           docker push cr.yandex/crpiq93oeqf9gf5j6t0l/frontend:latest
-
-      - name: Update Kubernetes manifests
-        run: |
-          sed -i -E "s#cr.yandex/crpiq93oeqf9gf5j6t0l/backend:[^[:space:]]+#cr.yandex/crpiq93oeqf9gf5j6t0l/backend:${IMAGE_TAG}#g" k8s/*.yaml
-          sed -i -E "s#cr.yandex/crpiq93oeqf9gf5j6t0l/frontend:[^[:space:]]+#cr.yandex/crpiq93oeqf9gf5j6t0l/frontend:${IMAGE_TAG}#g" k8s/*.yaml
-
-          echo "Updated Kubernetes images:"
-          grep -R "cr.yandex/crpiq93oeqf9gf5j6t0l" -n k8s
-
-      - name: Commit updated manifests
-        run: |
-          git config user.name "github-actions"
-          git config user.email "github-actions@github.com"
-
-          git add k8s/*.yaml
-
-          if git diff --cached --quiet; then
-            echo "No manifest changes to commit"
-            exit 0
-          fi
-
-          git commit -m "Update Kubernetes image tags to ${IMAGE_TAG} [skip ci]"
-          git push origin HEAD:master
