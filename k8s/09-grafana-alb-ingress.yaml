@@ -11,7 +11,8 @@ metadata:
 spec:
   ingressClassName: alb
   rules:
-    - http:
+    - host: devops.local
+      http:
         paths:
           - path: /grafana
             pathType: Prefix
