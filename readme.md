@@ -29,6 +29,11 @@ watch kubectl get hpa,deploy,pods -n devops
 Прямое подключение к БД
 kubectl exec -it mongo-55b9b9b7db-gnc9m -n devops -- mongosh
 
-admin - pass grafana
+admin12345 - pass grafana
+admin - login grafana
+
 DevOps1234567_ - pass sonarqube
 HXVHNf0-5jqEB7XC - pass argocd
+
+
+sqp_c20541ce987fe707b3047c8be6ba1881a7c61e79 - token sonarqube
