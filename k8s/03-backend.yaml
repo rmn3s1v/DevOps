@@ -16,7 +16,7 @@ spec:
     spec:
       containers:
         - name: backend
-          image: cr.yandex/crpiq93oeqf9gf5j6t0l/backend:ced2a41
+          image: cr.yandex/crpiq93oeqf9gf5j6t0l/backend:53e1268
           imagePullPolicy: Always
           ports:
             - name: http
@@ -40,10 +40,11 @@ metadata:
   labels:
     app: backend
 spec:
-  type: LoadBalancer
+  type: NodePort
   selector:
     app: backend
   ports:
     - name: http
       port: 8000
       targetPort: 8000
+      nodePort: 31521
