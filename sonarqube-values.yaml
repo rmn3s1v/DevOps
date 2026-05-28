@@ -1,0 +1,16 @@
+community:
+  enabled: true
+
+monitoringPasscode: sonar-monitoring-passcode-123
+
+service:
+  type: NodePort
+  externalPort: 9000
+  internalPort: 9000
+
+jdbcOverwrite:
+  enabled: true
+  jdbcUrl: "jdbc:postgresql://sonarqube-postgres.sonarqube.svc.cluster.local:5432/sonarDB"
+  jdbcUsername: "sonarUser"
+  jdbcSecretName: "sonarqube-jdbc"
+  jdbcSecretPasswordKey: "jdbc-password"
