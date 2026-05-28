@@ -35,5 +35,7 @@ admin - login grafana
 DevOps1234567_ - pass sonarqube
 HXVHNf0-5jqEB7XC - pass argocd
 
+sqp_8aa62c8e542294c8959906b4350a85432b3c7d36 - token sonarqube
 
-sqp_c20541ce987fe707b3047c8be6ba1881a7c61e79 - token sonarqube
+https://89.169.155.224:30443 - argoCD
+http://89.169.155.224:30090 - sonarQube
