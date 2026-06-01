@@ -37,5 +37,5 @@ HXVHNf0-5jqEB7XC - pass argocd
 
 sqp_8aa62c8e542294c8959906b4350a85432b3c7d36 - token sonarqube
 
-https://89.169.155.224:30443 - argoCD
-http://89.169.155.224:30090 - sonarQube
+https://158.160.51.251:30443 - argoCD
+http://158.160.51.251:30090 - sonarQube
